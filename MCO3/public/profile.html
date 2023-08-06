@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="styles2.css">
+  <style>
+    :root {
+      --primary-color: #d9d9d9;
+      --main-font: 'Cairo', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <h1 class="navbar-title">Profile</h1>
+      <ul class="navbar-links">
+        <li><a href="index.html">HOME</a></li>
+		<li><input class="button" type="submit" id="logout" name="logout" value="logout" /></li>
+      </ul>
+    </nav>
+  </header>
+  
+ 
+    <div class="bio-container">
+      <img class="profile-picture" src="images/random_200x200.jpg" alt="Profile Picture">
+      <div class="bio-content">
+        <h2>Login first!</h2>
+		<h3>Ruler of this Webpage</h3>
+        <p class="light" id ="content">
+		Greetings! It is our pleasure that you joined us today. We hope that our WebApp would be of 
+		some use to you. Enjoy!</p>
+      
+		  
+ 
+       
+	
+	 
+    </div>
+</body>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } 
+  from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+  
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+  import {getDatabase, set, ref, update, get, child } 
+  from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
+  from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+  
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyArQhKxYACdF_DHYaEh2qWlM-ZqvoM8ebo",
+  authDomain: "evalu-eat-547a3.firebaseapp.com",
+  databaseURL: "https://evalu-eat-547a3-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "evalu-eat-547a3",
+  storageBucket: "evalu-eat-547a3.appspot.com",
+  messagingSenderId: "295860521362",
+  appId: "1:295860521362:web:c421ebd81f0ab6e574594b"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+  const auth = getAuth(app);
+ 
+    const logOutButton = document.querySelector('#logout');
+    const h2Username = document.querySelector('.bio-content h2'); // Select the h2 element
+
+    logOutButton.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // Perform logout and redirect
+      signOut(auth).then(() => {
+        alert('Successfully Signed-out!');
+        window.location.href = 'login.html';
+      }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+    });
+
+    // Observe the authentication state
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, update the <h2> with the user's email
+        h2Username.textContent = user.email; // or user.displayName if you have set a display name
+      } else {
+        // User is signed out, update the <h2> back to default
+        h2Username.textContent = "Login first!";
+      }
+    });
+  </script>
+</body>
+</html>
