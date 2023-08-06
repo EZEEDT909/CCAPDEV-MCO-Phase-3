@@ -1,0 +1,33 @@
+
+.log-in-form {
+  margin: auto;
+  border: 5px solid #cacaca;
+  width: 450px;
+  padding: 3rem;
+  border-radius: 0;
+  background: linear-gradient(to top right, #99ccff 46%, #33cccc 93%);
+}
+
+.container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+form {
+  display: block;
+  margin-bottom: 20px;
+}
+
+input {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 10px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+}
